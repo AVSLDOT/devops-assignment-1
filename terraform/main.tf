@@ -1,3 +1,4 @@
+```terraform
 terraform {
   required_providers {
     aws = {
@@ -9,36 +10,12 @@ terraform {
 
 # Configure the AWS Provider
 
+provider "aws" {
+  region = "us-east-1"
+  sts_region = "us-east-1"
+}
 
-resource "aws_security_group" "allow_jenkins_ssh" {
-   name        = "allow_jenkins_ssh_traffic"
-   description = "Allow Jenkins and ssh inbound traffic"
-     vpc_id      = aws_vpc.launch-wizard-1.id
-ingress {
-     description = "HTTP_Jenkins"
-     from_port   = 8080
-     to_port     = 8080
-     protocol    = "tcp"
-     cidr_blocks = ["0.0.0.0/0"]
-   }
-   ingress {
-     description = "SSH"
-     from_port   = 22
-     to_port     = 22
-     protocol    = "tcp"
-     cidr_blocks = ["0.0.0.0/0"]
-   }
-   egress {
-     from_port   = 0
-     to_port     = 0
-     protocol    = "-1"
-     cidr_blocks = ["0.0.0.0/0"]
-   }
-
-   tags = {
-     Name = "allow_jenkins_ssh"
-   }
- }
+# netowrking
 
 
 # RSA key of size 4096 bits
@@ -67,5 +44,7 @@ resource "aws_instance" "jenkins" {
   tags = {
     Name = "jenkins"
   }
-  security_groups = [aws_security_group.launch-wizard-1.id]  
+  security_groups = [aws_security_group.allow_jenkins_ssh.id]
+  subnet_id = aws_subnet.subnet-1.id 
 }
+```
