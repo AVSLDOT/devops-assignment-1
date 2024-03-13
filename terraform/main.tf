@@ -109,10 +109,9 @@ resource "local_file" "private_key" {
 resource "aws_instance" "jenkins" {
   ami           = "ami-07d9b9ddc6cd8dd30"
   instance_type = "t2.micro"
-  vpc_id = aws_vpc.jenkins-vpc.id
   key_name = aws_key_pair.key_pair.key_name 
   tags = {
     Name = "jenkins"
   }
-  security_groups = [aws_security_group.allow_jenkins_ssh.name]
+  security_groups = aws_security_group.allow_jenkins_ssh.id
 }
