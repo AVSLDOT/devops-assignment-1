@@ -1,3 +1,4 @@
+```terraform
 terraform {
   required_providers {
     aws = {
@@ -116,3 +117,4 @@ resource "aws_instance" "jenkins" {
   security_groups = [aws_security_group.allow_jenkins_ssh.id]
   subnet_id = aws_subnet.subnet-1.id 
 }
+```
