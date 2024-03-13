@@ -113,5 +113,5 @@ resource "aws_instance" "jenkins" {
   tags = {
     Name = "jenkins"
   }
-  security_groups = aws_security_group.allow_jenkins_ssh.id
+  security_groups = aws_security_group.allow_jenkins_ssh.name
 }
