@@ -1,0 +1,28 @@
+- name: install jenkins
+  hosts: tag_Name_jenkins
+  become: true
+  tasks:
+    - name: add jenkins repo key
+      apt_key:
+        url: 'https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key'
+        state: present
+    - name: repository configuration jenkins
+      apt_repository:
+        repo: 'deb https://pkg.jenkins.io/debian-stable binary/'
+        state: present
+    - name: install python
+      apt:
+        name: python3
+        update_cache: no
+    - name: install java
+      apt:
+        name: openjdk-17-jdk
+        update_cache: no
+    - name: install jenkins
+      apt:
+        name: jenkins
+        update_cache: yes
+    - name: start service jenkins
+      service:
+        name: jenkins
+        state: started
