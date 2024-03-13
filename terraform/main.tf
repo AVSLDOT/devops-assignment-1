@@ -32,6 +32,38 @@ resource "local_file" "private_key" {
     filename = var.key_name
 }
 
+resource "aws_security_group" "allow_access" {
+   name        = "allow_web_traffic"
+   description = "Allow Web inbound traffic"
+     vpc_id      = aws_vpc.edu-vpc.id
+
+ingress {
+     description = "HTTP-jenkins"
+     from_port   = 8080
+     to_port     = 8080
+     protocol    = "tcp"
+     cidr_blocks = ["0.0.0.0/0"]
+   }
+   ingress {
+     description = "SSH"
+     from_port   = 22
+     to_port     = 22
+     protocol    = "tcp"
+     cidr_blocks = ["0.0.0.0/0"]
+   }
+   egress {
+     from_port   = 0
+     to_port     = 0
+     protocol    = "-1"
+     cidr_blocks = ["0.0.0.0/0"]
+   }
+
+   tags = {
+     Name = "allow_web"
+   }
+ }
+
+
 
 resource "aws_instance" "jenkins" {
   ami           = "ami-07d9b9ddc6cd8dd30"
