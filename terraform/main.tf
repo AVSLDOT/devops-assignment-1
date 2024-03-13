@@ -40,13 +40,13 @@ vpc_id = aws_vpc.jenkins-vpc.id
    }
  }
 
-resource "aws_route_table_association" "a" {
+resource "aws_route_table_association" "assiciation" {
   subnet_id      = aws_subnet.subnet-1.id
   route_table_id = aws_route_table.jenkins-route-table.id
 }
 
 resource "aws_internet_gateway" "gw" {
- vpc_id = aws_vpc.jenkins-route-table.id
+ vpc_id = aws_vpc.jenkins-vpc.id
 depends_on = [aws_vpc.jenkins-vpc]
  }
 
