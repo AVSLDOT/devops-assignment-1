@@ -32,9 +32,6 @@ resource "local_file" "private_key" {
     filename = var.key_name
 }
 
-resource "aws_ec2_serial_console_access" "jenkins" {
-  enabled = true
-}
 
 resource "aws_security_group" "security" {
   name = "allow-all"
