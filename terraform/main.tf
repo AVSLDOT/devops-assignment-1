@@ -94,6 +94,9 @@ resource "aws_instance" "jenkins" {
   ami           = "ami-07d9b9ddc6cd8dd30"
   instance_type = "t2.micro"
   key_name = aws_key_pair.key_pair.key_name 
+  subnet_id              = aws_default_subnet.default_az1.id
+  vpc_security_group_ids = [aws_security_group.ec2_security_group.id]
+
   tags = {
     Name = "jenkins"
   }
