@@ -26,3 +26,8 @@
       service:
         name: jenkins
         state: started
+    - name: cat jenkins pw file
+      command: cat /var/lib/jenkins/secrets/initialAdminPassword
+      register: jenkins_pw_file
+    - name: print jenkins pw file
+      debug:  var=jenkins_pw_file
