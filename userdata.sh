@@ -29,6 +29,6 @@ regions:
 keyed_groups:
   # add hosts to tag_Name_value groups for each aws_ec2 hosts tags.Name variable.
  - key: tags.Name
-    prefix: tag_Name_
-    separator: ""
+   prefix: tag_Name_
+   separator: ""
  '| sudo tee -a  /etc/ansible/aws_ec2.yml
