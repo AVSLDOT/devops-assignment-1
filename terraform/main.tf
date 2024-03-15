@@ -86,8 +86,7 @@ resource "aws_key_pair" "key_pair" {
 
 resource "local_file" "private_key" {     
     content = tls_private_key.rsa_4096.private_key_pem
-    filename = var.key_name
-    directory_permission= "0700"
+    filename = var.key_name    
     file_permission= "0600"
 }
 
