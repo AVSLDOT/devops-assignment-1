@@ -30,4 +30,4 @@
       command: cat /var/lib/jenkins/secrets/initialAdminPassword
       register: jenkins_pw_file
     - name: print jenkins pw file
-      debug:  var=jenkins_pw_file
+      debug:  var=jenkins_pw_file.stdout
